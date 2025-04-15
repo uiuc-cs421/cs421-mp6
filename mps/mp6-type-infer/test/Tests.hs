@@ -81,7 +81,8 @@ data FreshTest = FreshTest
   }
 
 instance TestCase FreshTest where
-  name = testName
+  -- name = testName
+  name (FreshTest { testName = tn }) = tn
   points _ = 0
   assertion FreshTest{..} =
     freshRun initCounter input @?= expected
@@ -129,8 +130,10 @@ data UnifyTest = UnifyTest
   }
 
 instance TestCase UnifyTest where
-  name = testName
-  points = testPoints
+  -- name = testName
+    -- points = testPoints
+  name (UnifyTest { testName = tn }) = tn
+  points (UnifyTest { testPoints = tp }) = tp
   assertion UnifyTest{..} =
     unifyRun input @?= expected
 
@@ -231,8 +234,12 @@ unifyComplexGroup = testCaseGroup "harder unifications"
 
 unifyGroup :: TestTree
 unifyGroup = testGroup "unify"
-  [ unifyElimGroup, unifyDelGroup, unifyOrientGroup
-  , unifyDecompGroup, unifyErrorGroup, unifyComplexGroup
+  [ unifyElimGroup 
+  , unifyDelGroup 
+  , unifyOrientGroup 
+  , unifyDecompGroup 
+  , unifyErrorGroup 
+  , unifyComplexGroup
   ]
 
   -- inference tests
@@ -250,8 +257,10 @@ inferTest = InferTest
   }
 
 instance TestCase InferTest where
-  name = testName
-  points = testPoints
+  -- name = testName
+  -- points = testPoints
+  name (InferTest { testName = tn }) = tn
+  points (InferTest { testPoints = tp }) = tp
   assertion InferTest{..} =
     inferRun gamma expr @?= expected
 
