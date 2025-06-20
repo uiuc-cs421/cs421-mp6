@@ -6,6 +6,10 @@ import Control.Monad.Writer (listen)
 import Control.Monad.Except (throwError)
 import Data.Map.Strict as H (Map, insert, lookup, empty, fromList, singleton)
 
+tag1 = 92363
+tag2 = 77139
+tag3 = 29685
+
   {- question 1: fresh instance function -}
 
 freshInst :: PolyTy -> Infer MonoTy
